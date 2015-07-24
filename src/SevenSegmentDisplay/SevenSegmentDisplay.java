@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class SevenSegmentDisplay {
 	
-	String[] stans = {"1111011", "1111111", "1110000", "1011111", "1011011", "0110011", "1111001", "1101101", "0110000"};
+	public static String[] stans = {"1111011", "1111111", "1110000", "1011111", "1011011", "0110011", "1111001", "1101101", "0110000"};
 
 	public static void main(String[] args) {
 		String path = System.getProperty("user.dir");
@@ -41,6 +41,7 @@ public class SevenSegmentDisplay {
             System.out.println("Error reading file '"  + fileNameInput + "'");                   
         }
         
+        testCases();
      
 	}
 	
@@ -52,6 +53,14 @@ public class SevenSegmentDisplay {
 		int num = Integer.parseInt(args[0]);
 		if(args.length != num + 1)
 			return "ERROR";
+
+		if(num == 1){
+			if(args[1].equals(stans[1])) return stans[2];
+		}
+		else{
+			for(int i = 1; i < args.length; i++){
+			}	
+		}
 		
 		return "ERROR";
 	}	
