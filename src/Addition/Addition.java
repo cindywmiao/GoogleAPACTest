@@ -32,6 +32,7 @@ public class Addition {
             int caseNum = Integer.parseInt(line);
             
             for(int i = 0; i < caseNum; i++){
+            	graph = new HashMap<String, UndirectedGraphNode>();
             	line = bufferedReader.readLine();
             	int knownCaseNumber = Integer.parseInt(line);
             	for(int j = 0; j < knownCaseNumber; j++){
@@ -46,6 +47,14 @@ public class Addition {
             	
             	bufferedWriter.write("Case #" + count + ":");
             	bufferedWriter.newLine();
+            	
+            	System.out.println("Case #" + count + ":");
+            	
+            	for(Map.Entry<String, UndirectedGraphNode> entry : graph.entrySet()){
+            			if(entry.getValue().known){
+            				System.out.println(entry.getKey() + ":" + entry.getValue().value);
+            			}
+            	}
             	
             	line = bufferedReader.readLine();
             	int unknownCaseNumber = Integer.parseInt(line);
@@ -78,8 +87,10 @@ public class Addition {
 				UndirectedGraphNode node = graph.get(elem1);
 				list.add(node);
 				if(!node.known){
-					node.value = value/2;	
+					node.value = value/2;
+					node.known = true;
 				}
+				
 				
 				while(list.size() != 0){
 					for(int i = 0; i < list.size(); i++){
@@ -94,7 +105,7 @@ public class Addition {
 								list.add(tmpNode);
 							}
 						}
-						neighbors = node.negativeNeighbors;
+						/*neighbors = node.negativeNeighbors;
 						for(Map.Entry<UndirectedGraphNode, Integer> entry:neighbors.entrySet()){
 							UndirectedGraphNode tmpNode = entry.getKey();
 							if(!tmpNode.known){
@@ -102,13 +113,13 @@ public class Addition {
 								tmpNode.known = true;
 								list.add(tmpNode);
 							}
-						}
+						}*/
 						
 					}
 				}
 			}
 			else{
-				UndirectedGraphNode newNode = new UndirectedGraphNode(elem1,  value/2);
+				UndirectedGraphNode newNode = new UndirectedGraphNode(elem1,  (double)value/2);
 				newNode.known = true;
 				graph.put(elem1, newNode);
 	
@@ -158,7 +169,8 @@ public class Addition {
 			
 			
 			if(node1.known && node2.known){
-				bufferedwriter.write(elem1 + "+" + elem2 + "=" + node1.value + node2.value);
+				int result = (int)(node1.value + node2.value);
+				bufferedwriter.write(elem1 + "+" + elem2 + "=" + result) ;
 				bufferedwriter.newLine();
 			}
 			
