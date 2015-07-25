@@ -35,7 +35,7 @@ public class Standard {
 	            
 	    	 for(int i = 0; i < caseNum; i++){
 
-	    		 bufferedWriter.write("Case #" + i + ": ");
+	    		 bufferedWriter.write("Case #" + (i + 1) + ": ");
 	    		 bufferedWriter.newLine();
 	    	 }
 	    	 bufferedReader.close();    
