@@ -1,4 +1,4 @@
-package CardGame;
+package Minesweeper;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,24 +6,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
 
-public class CardGame {
+public class Minesweeper {
 	public static String path = System.getProperty("user.dir");
     
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		practice("C-my-practice");
-		practice("C-small-practice");
-		practice("C-large-practice");
+		practice("A-my-practice");
+		//practice("A-small-practice");
+		//practice("A-large-practice");
        
 	}
-	
-	
 	public static void practice(String fileName){
-		String fileNameInput = path + "//RoundB//" + fileName + ".in";
-		String fileNameOutput = path + "//RoundB//" + fileName + ".out";
+		String fileNameInput = path + "//RoundC//" + fileName + ".in";
+		String fileNameOutput = path + "//RoundC//" + fileName + ".out";
 		String line = null;
 
 	    try {
@@ -39,18 +35,19 @@ public class CardGame {
 	            
 	    	 for(int i = 0; i < caseNum; i++){
 	    		 line = bufferedReader.readLine();
-	    		 String[] temp1 = line.split(" ");
-	    		 int cardsNum = Integer.parseInt(temp1[0]);
-	    		 int K = Integer.parseInt(temp1[1]);
-	    		 int[] cards = new int[cardsNum];
-	    		 line = bufferedReader.readLine();
-	    		 String[] temp2 = line.split(" ");
-	    		 for(int j = 0; j < temp2.length; j++){
-	    			 cards[j] = Integer.parseInt(temp2[j]);
-	    		 }
+	    		 int n = Integer.parseInt(line);
+	    		 int[][] matrix = new int[n][n];
 	    		 
-	    		 int result = cardGame(cardsNum, cards, K);
-	    		 bufferedWriter.write("Case #" + i + ": " + result);
+	    		 for(int j = 0; j < n; j++){
+	    			 line = bufferedReader.readLine();
+	    			 for(int k = 0; k < n; k++){
+	    				 if(line.charAt(k) == '.') matrix[j][k] = 0;
+	    				 else if(line.charAt(k) == '*') matrix[j][k] = -1;
+	    			 }
+	    		 }
+	    		 minesweeper(n, matrix);
+	    		 
+	    		 bufferedWriter.write("Case #" + i + ": ");
 	    		 bufferedWriter.newLine();
 	    	 }
 	    	 bufferedReader.close();    
@@ -64,23 +61,17 @@ public class CardGame {
 	     }
 	}
 	
-	public static int cardGame(int num, int[] cards, int K){
-		List<Integer> mylist = new ArrayList<Integer>();
-		for(int n : cards) mylist.add(n);
-		
-		
-		for(int i = 2; i < mylist.size();){
-			if(mylist.size() < 3) return mylist.size();
-			else if(i >= 2 && mylist.get(i) - mylist.get(i - 1) == K && mylist.get(i - 1) - mylist.get(i - 2) == K){
-				mylist.remove(i);
-				mylist.remove(i - 1);
-				mylist.remove(i - 2);
-				i = i - 2;
+	public static int minesweeper(int n, int[][] matrix){
+		printMatrix(n, matrix);
+		return 0;
+	}
+	
+	public static void printMatrix(int n, int[][] matrix){
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				System.out.print(matrix[i][j] + " ");
 			}
-			else{
-				i++;
-			}
+			System.out.println();
 		}
-		return mylist.size();
 	}
 }
