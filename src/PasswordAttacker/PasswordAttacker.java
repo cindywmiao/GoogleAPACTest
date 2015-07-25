@@ -35,7 +35,15 @@ public class PasswordAttacker {
 	    	 int caseNum = Integer.parseInt(line);
 	            
 	    	 for(int i = 0; i < caseNum; i++){
+	    		 line = bufferedReader.readLine();
+	    		 String[] temp = line.split(" ");
+	    		 int m = Integer.parseInt(temp[0]);
+	    		 int n = Integer.parseInt(temp[1]);
 	    		 bufferedWriter.write("Case #" + i + ": ");
+	    		 int result = passwordAttacker(m, n);
+	    		 if(result != 0){
+	    			 bufferedWriter.write("" + result);
+	    		 }
 	    		 bufferedWriter.newLine();
 	    	 }
 	    	 bufferedReader.close();    
@@ -47,5 +55,11 @@ public class PasswordAttacker {
 	     catch(IOException ex) {
 	    	 System.out.println("Error reading file '"  + fileNameInput + "'");                   
 	     }
+	}
+	
+	public static int passwordAttacker(int m, int n){
+		if (m == 1 || m == n) return 1;
+		else return 0;
+		
 	}
 }
